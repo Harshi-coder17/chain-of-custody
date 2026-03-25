@@ -23,6 +23,9 @@ console.log('custody:', typeof custodyRoutes);
 console.log('forensic:', typeof forensicRoutes);
 console.log('officers:', typeof officerRoutes);
 
+// ── Health check ─────────────────────────────────
+app.get('/api/ping', (req, res) => res.json({ status: 'ok' }));
+
 // ── Route mounting (same logic, just using variables) ──
 app.use('/api/auth', authRoutes);
 app.use('/api/cases', caseRoutes);
@@ -30,9 +33,6 @@ app.use('/api/evidence', evidenceRoutes);
 app.use('/api/custody', custodyRoutes);
 app.use('/api/forensic', forensicRoutes);
 app.use('/api/officers', officerRoutes);
-
-// ── Health check ─────────────────────────────────
-app.get('/api/ping', (req, res) => res.json({ status: 'ok' }));
 
 // ── Start server ─────────────────────────
 const PORT = process.env.PORT || 5000;
