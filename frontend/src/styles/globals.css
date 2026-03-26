@@ -1,0 +1,84 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Playfair+Display:ital,wght@0,700;1,700&display=swap");
+:root {
+ /* ── Background Layers ── */
+ --bg-page: #080C14; /* Deepest layer — page bg */
+ --bg-surface: #0E1421; /* Cards, panels */
+ --bg-raised: #141C2E; /* Elevated cards */
+ --bg-input: #0A0E19; /* Input fields */
+ --bg-overlay: rgba(0,0,0,0.72); /* Modal backdrop */
+ /* ── Borders ── */
+ --border-faint: #151E30;
+ --border-default: #1E2D47;
+ --border-strong: #2A3F63;
+ /* ── Text ── */
+ --text-primary: #E8EEF8;
+ --text-secondary: #8A9ABB;
+ --text-muted: #3D4F6E;
+ --text-disabled: #242E42;
+ /* ── Brand Accent ── */
+ --accent: #2563EB;
+ --accent-hover: #1D4ED8;
+ --accent-glow: rgba(37,99,235,0.18);
+ --accent-subtle: rgba(37,99,235,0.08);
+ /* ── Status: Case ── */
+ --open: #D97706; /* Amber */
+ --open-bg: rgba(217,119,6,0.1);
+ --investigating: #2563EB; /* Blue */
+ --investigating-bg: rgba(37,99,235,0.1);
+ --closed: #059669; /* Green */
+ --closed-bg: rgba(5,150,105,0.1);
+ /* ── Status: Evidence ── */
+ --collected: #D97706;
+ --collected-bg: rgba(217,119,6,0.1);
+ --analysis: #7C3AED; /* Purple */
+ --analysis-bg: rgba(124,58,237,0.1);
+ --stored: #059669
+ --stored-bg: rgba(5,150,105,0.1);
+ --presented: #0891B2; /* Cyan */
+ --presented-bg: rgba(8,145,178,0.1);
+ /* ── Role Colours ── */
+ --role-admin: #EF4444;
+ --role-admin-bg: rgba(239,68,68,0.08);
+ --role-officer: #2563EB;
+ --role-officer-bg:rgba(37,99,235,0.08);
+ --role-analyst: #059669;
+ --role-analyst-bg:rgba(5,150,105,0.08);
+ --role-judicial: #D97706;
+ --role-judicial-bg:rgba(217,119,6,0.08);
+ /* ── Typography ── */
+ --font-sans: "Inter", system-ui, sans-serif;
+ --font-mono: "JetBrains Mono", "Fira Code", monospace;
+ --font-serif: "Playfair Display", Georgia, serif;
+ /* ── Geometry ── */
+ --r-sm: 5px;
+ --r-md: 9px;
+ --r-lg: 14px;
+ --r-xl: 20px;
+ /* ── Shadows ── */
+ --shadow-sm: 0 1px 3px rgba(0,0,0,0.4);
+ --shadow-md: 0 4px 16px rgba(0,0,0,0.5);
+ --shadow-lg: 0 12px 40px rgba(0,0,0,0.6);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+ background: var(--bg-page);
+ color: var(--text-primary);
+ font-family: var(--font-sans);
+ font-size: 14px;
+ line-height: 1.6;
+ -webkit-font-smoothing: antialiased;
+}
+input, textarea, select {
+ font-family: var(--font-sans);
+ color: var(--text-primary);
+ background: var(--bg-input);
+ outline: none;
+}
+input:focus, textarea:focus, select:focus {
+ border-color: var(--accent) !important;
+ box-shadow: 0 0 0 3px var(--accent-glow);
+}
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: var(--bg-page); }
+::-webkit-scrollbar-thumb { background: var(--border-default); border-radius: 4px;
+}
