@@ -3,6 +3,8 @@ const bcrypt = require('bcryptjs');
 const db = require('../db');
 const { generateToken } = require('../auth');
 router.post('/login', async (req, res) => {
+  console.log("LOGIN ROUTE HIT")});
+router.post('/login', async (req, res) => {
 const { officer_id, password } = req.body;
 if (!officer_id || !password)
 return res.status(400).json({ error: 'officer_id and password are required.' });
@@ -27,4 +29,5 @@ officer_id: officer.officer_id,
 res.status(500).json({ error: err.message });
 }
 });
+
 module.exports = router;
