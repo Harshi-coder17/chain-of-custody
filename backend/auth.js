@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 
-// Generated a JWT token for a logged-in officer
+// Generate token
 function generateToken(officer) {
   return jwt.sign(
     {
@@ -13,14 +13,12 @@ function generateToken(officer) {
   );
 }
 
-// verify token on every protected route using middlewares
+// Authenticate middleware
 function authenticate(req, res, next) {
   const header = req.headers['authorization'];
+  const token = header && header.split(' ')[1];
 
-  // ✅ CHANGE: allow requests without token (for public routes like /api/ping)
-  if (!header) return next();
-
-  const token = header.split(' ')[1];
+  if (!token) return res.status(401).json({ error: 'Authentication required.' });
 
   try {
     req.user = jwt.verify(token, process.env.JWT_SECRET);
@@ -30,11 +28,10 @@ function authenticate(req, res, next) {
   }
 }
 
-// Middleware factory: restrict to specific roles
+// Role middleware
 function requireRole(...roles) {
   return (req, res, next) => {
-    // ✅ CHANGE: added check for req.user
-    if (!req.user || !roles.includes(req.user.role)) {
+    if (!roles.includes(req.user.role)) {
       return res.status(403).json({ error: 'Access denied: insufficient role.' });
     }
     next();

@@ -16,7 +16,7 @@ SELECT
    e.hash_value,
    e.status            AS evidence_status,
    o.name              AS handling_officer,
-   o.rank_name              AS officer_rank,
+   o.rank              AS officer_rank,
    cl.action           AS custody_action,
    cl.action_time,
    s.location          AS storage_location
