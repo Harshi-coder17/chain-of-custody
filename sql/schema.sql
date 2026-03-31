@@ -1,9 +1,4 @@
--- ================================================
 -- sql/schema.sql
--- Chain-of-Custody DBMS — Full Schema
--- Run after: USE chain_of_custody;
--- MySQL 8.0 | InnoDB | UCS310 Jan-Jun 2026
--- ================================================
  
 USE chain_of_custody;
  
