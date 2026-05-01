@@ -6,16 +6,16 @@ const db = require('../db');
 //  Create Officer
 router.post('/', async (req, res) => {
     try {
-        const { name, rank_name, department, password_hash } = req.body;
+        const { name, rank, department, password_hash } = req.body;
 
-        if (!name || !rank_name || !department || !password_hash) {
+        if (!name || !rank || !department || !password_hash) {
             return res.status(400).json({ error: 'Missing required fields' });
         }
 
         const [result] = await db.execute(
-            `INSERT INTO Officer (name, rank_name, department, password_hash)
+            `INSERT INTO Officer (name, rank, department, password_hash)
              VALUES (?, ?, ?, ?)`,
-            [name, rank_name, department, password_hash]
+            [name, rank, department, password_hash]
         );
 
         res.status(201).json({
@@ -32,15 +32,16 @@ router.post('/', async (req, res) => {
 //  Get All Officers
 router.get('/', async (req, res) => {
     try {
-        const [rows] = await db.execute(`
-            SELECT officer_id, name, rank_name, department
-            FROM Officer
-            ORDER BY officer_id DESC
-        `);
+        const query = "SELECT officer_id, name, `rank`, department FROM Officer ORDER BY officer_id DESC";
+
+        console.log("QUERY:", query);
+
+        const [rows] = await db.execute(query);
 
         res.json(rows);
 
     } catch (err) {
+        console.error("SQL ERROR:", err);
         res.status(500).json({ error: err.message });
     }
 });
@@ -52,7 +53,7 @@ router.get('/:id', async (req, res) => {
         const { id } = req.params;
 
         const [rows] = await db.execute(
-            `SELECT officer_id, name, rank_name, department
+            `SELECT officer_id, name, \`rank\`, department
              FROM Officer WHERE officer_id = ?`,
             [id]
         );

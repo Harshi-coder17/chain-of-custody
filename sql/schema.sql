@@ -1,9 +1,4 @@
--- ================================================
 -- sql/schema.sql
--- Chain-of-Custody DBMS — Full Schema
--- Run after: USE chain_of_custody;
--- MySQL 8.0 | InnoDB | UCS310 Jan-Jun 2026
--- ================================================
  
 USE chain_of_custody;
  
@@ -31,7 +26,7 @@ CREATE TABLE Case_Details (
 CREATE TABLE Officer (
    officer_id    INT           NOT NULL AUTO_INCREMENT,
    name          VARCHAR(100)  NOT NULL,
-   rank_name          VARCHAR(50)   NOT NULL,
+   rank          VARCHAR(50)   NOT NULL,
    department    VARCHAR(100)  NOT NULL,
    role          ENUM(
                    'admin',

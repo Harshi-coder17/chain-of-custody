@@ -6,12 +6,13 @@ const { authenticate, requireRole } = require('../auth');
 router.get('/evidence/:id', authenticate, async (req, res) => {
   try {
     const [rows] = await db.query(
-      `SELECT cl.log_id,
-              cl.evidence_id,
-              cl.action,
-              cl.action_time,
-              o.name AS officer_name,
-              o.rank AS officer_rank
+      `SELECT 
+          cl.log_id,
+          cl.evidence_id,
+          cl.action,
+          cl.action_time,
+          o.name AS officer_name,
+          o.rank AS officer_rank
        FROM Custody_Log cl
        JOIN Officer o ON cl.officer_id = o.officer_id
        WHERE cl.evidence_id = ?
@@ -34,9 +35,7 @@ router.post(
     const { evidence_id, officer_id, action, new_status } = req.body;
 
     if (!evidence_id || !officer_id || !action || !new_status) {
-      return res.status(400).json({
-        error: 'All fields are required.'
-      });
+      return res.status(400).json({ error: 'All fields are required.' });
     }
 
     try {
@@ -45,8 +44,7 @@ router.post(
         [evidence_id, officer_id, action, new_status]
       );
 
-      res.json({ message: "Custody transferred successfully." });
-
+      res.json({ message: 'Custody transferred successfully.' });
     } catch (err) {
       res.status(500).json({ error: err.message });
     }
