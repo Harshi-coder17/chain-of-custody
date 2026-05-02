@@ -2,8 +2,8 @@ import { createContext, useContext, useState } from 'react';
 const Ctx = createContext(null);
 export function AuthProvider({ children }) {
  const [user, setUser] = useState(() => {
- const s = sessionStorage.getItem('coc_session');
- return s ? JSON.parse(s) : null;
+  const s = sessionStorage.getItem('coc_session');
+  return s ? JSON.parse(s) : null;
  });
  const login = data => {
  sessionStorage.setItem('coc_session', JSON.stringify(data));
