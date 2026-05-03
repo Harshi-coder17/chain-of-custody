@@ -26,7 +26,7 @@ CREATE TABLE Case_Details (
 CREATE TABLE Officer (
    officer_id    INT           NOT NULL AUTO_INCREMENT,
    name          VARCHAR(100)  NOT NULL,
-   rank          VARCHAR(50)   NOT NULL,
+   `rank`          VARCHAR(50)   NOT NULL,
    department    VARCHAR(100)  NOT NULL,
    role          ENUM(
                    'admin',
