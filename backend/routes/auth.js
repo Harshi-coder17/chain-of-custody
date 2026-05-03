@@ -4,10 +4,9 @@ const db = require('../db');
 const { generateToken } = require('../auth');
 
 router.post('/login', async (req, res) => {
-  console.log("LOGIN ROUTE HIT");   // 👈 ADD THIS LINE HERE
+  console.log("LOGIN ROUTE HIT");
 
   const { officer_id, password } = req.body;
-
 
   if (!officer_id || !password)
     return res.status(400).json({ error: 'officer_id and password are required.' });
@@ -23,12 +22,21 @@ router.post('/login', async (req, res) => {
 
     const officer = rows[0];
 
-console.log("Entered password:", password);
-console.log("Stored hash:", officer.password_hash);
+    
+    if (!officer.password_hash) {
+      return res.status(500).json({ error: 'Password hash missing in DB.' });
+    }
 
-const valid = await bcrypt.compare(password, officer.password_hash);
+    console.log("Entered password:", password);
+    console.log("Stored hash:", officer.password_hash);
 
-console.log("Match result:", valid);
+    
+    const valid = await bcrypt.compare(
+      String(password),
+      String(officer.password_hash)
+    );
+
+    console.log("Match result:", valid);
 
     if (!valid)
       return res.status(401).json({ error: 'Invalid credentials.' });
@@ -43,6 +51,7 @@ console.log("Match result:", valid);
     });
 
   } catch (err) {
+    console.error("Login error:", err);   
     res.status(500).json({ error: err.message });
   }
 });
